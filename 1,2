@@ -115,7 +115,7 @@
                     }
                     return root;
                 }
-                if (height(temp -> left,0)> 1 || height(temp -> right,0) > 1){
+                if (height(temp -> left,0) > 1 || height(temp -> right,0) > 1){
                     if (balfactor (temp,1) == 0){
                         temp -> right = popp (temp -> right);
                         if (temp -> right == root -> right){
@@ -214,6 +214,24 @@
             }
             }
 
+            void merger (heap &A, heap &B){
+                node* main = A.root;
+                if (A.root -> key > B.root -> key)
+                    A.root = main;
+                else
+                mmerger(A, B, B.root);
+            }
+
+            node* mmerger(heap &A, heap &B, node* temp){
+                if (temp -> right)
+                    temp -> right = mmerger (A, B, temp -> right);
+                if (temp -> left)
+                    temp -> left = mmerger (A, B, temp -> left);
+                A.push (temp -> key);
+            return temp;
+            }
+
+
             ~heap(){
                 deleteall(root);
                 root == NULL;
@@ -225,9 +243,10 @@
 
 
 
+
     int main(){
         heap tree;
-        
+
         tree.push (6);
         tree.push(2);
         tree.push(3);
@@ -236,15 +255,28 @@
         tree.push(9);
         tree.push(10);
         tree.update (7);
+
         tree.print();
         tree.findmax();
         tree.pop();
         tree.pop();
         tree.pop();
+
         tree.print();
 
         heap A(tree);
         A.print();
+
+        heap C;
+        C.push(1);
+        C.push(5);
+        C.push(11);
+        C.push(4);
+
+        A.merger(A,C);
+        A.print();
+
         return 0;
 
     }
+
