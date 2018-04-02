@@ -46,7 +46,7 @@
 
             void print(){
                 cout << "Your heap-tree is: "<< endl;
-                pprint(root);
+                root = pprint(root);
             }
 
             node* copy (node* temp){
@@ -197,20 +197,23 @@
                         pprint(temp -> right);
                     }
                     else cout << "right: 0"<< endl;
-                    return 0;
                  }
-                 else cout << " really?";
-                 return 0;
+                 else
+                    cout << " really?";
+                 return temp;
             }
 
             node* deleteall(node *temp){
             if (root){
-                if(temp -> right -> right)
-                    deleteall(temp -> right);
-                if(temp -> left -> right)
-                    deleteall(temp -> left);
+                if (temp -> right)
+                    if(temp -> right -> right || temp -> right -> left)
+                        temp -> right = deleteall(temp -> right);
+                if(temp -> left)
+                    if(temp -> left -> right || temp -> left -> left)
+                        temp -> left = deleteall(temp -> left);
                 temp -> right == NULL;
                 temp -> left == NULL;
+                return temp;
             }
             }
 
@@ -246,20 +249,9 @@
 
     int main(){
         heap tree;
-
         tree.push (6);
         tree.push(2);
-        tree.push(3);
-        tree.push(3);
-        tree.push(8);
-        tree.push(9);
-        tree.push(10);
-        tree.update (7);
-
-        tree.print();
-        tree.findmax();
-        tree.pop();
-        tree.pop();
+        
         tree.pop();
 
         tree.print();
@@ -277,6 +269,3 @@
         A.print();
 
         return 0;
-
-    }
-
