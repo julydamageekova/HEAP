@@ -251,7 +251,7 @@
         heap tree;
         tree.push (6);
         tree.push(2);
-        
+
         tree.pop();
 
         tree.print();
@@ -264,8 +264,9 @@
         C.push(5);
         C.push(11);
         C.push(4);
-
+        C.print();
         A.merger(A,C);
         A.print();
 
         return 0;
+    }
