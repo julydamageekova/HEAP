@@ -218,10 +218,6 @@
             }
 
             void merger (heap &A, heap &B){
-                node* main = A.root;
-                if (A.root -> key > B.root -> key)
-                    A.root = main;
-                else
                 mmerger(A, B, B.root);
             }
 
